@@ -38,3 +38,6 @@ if uploaded_file is not None:
     ).interactive()  # Activar zoom y pan
         
     st.altair_chart(chart, use_container_width=True)
+    
+    
+    a = "variable"
