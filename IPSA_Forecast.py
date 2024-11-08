@@ -4,7 +4,7 @@ import altair as alt
 import statsmodels.api as sm
 
 #Formatea los valores de fecha y números para leerlos correctamente
-def clean_data(df):
+def clean_data(df, **kwargs):
     try:
         df['Fecha'] = pd.to_datetime(df['Fecha'], format='%d.%m.%Y', errors='coerce') #Este es el formato DD.MM.AA
     except Exception as e:
@@ -21,7 +21,7 @@ def clean_data(df):
         st.write("Datos formateados", df.head())
     return df
 
-def forecast_model(df):
+def forecast_model(df, **kwargs):
     model_sarima = sm.tsa.SARIMAX(df['Último'], order=(0,1,1), seasonal_order=(0,0,1,3))  # Cambia según sea necesario
     model_fit_sarima = model_sarima.fit()
     forecast_sarima = model_fit_sarima.forecast(steps=4)
@@ -30,7 +30,7 @@ def forecast_model(df):
     #forecast_df['Fecha'] = pd.to_datetime(forecast_df['Fecha'], format = '%d.%m.%Y', errors='coerce')
     return forecast_df
 
-def generate_chart(df):
+def generate_chart(df, **kwargs):
     chart = alt.Chart(df).mark_line().encode(
         x='Fecha:T',
         y='Último:Q',
