@@ -27,6 +27,9 @@ def forecast_model(df, **kwargs):
     forecast_sarima = model_fit_sarima.forecast(steps=4)
     forecast_df = forecast_sarima.reset_index()
     forecast_df.columns = ['Fecha', 'Predicción']
+    forecast_dates = ["04.11.2024","05.11.2024","06.11.2024","07.11.2024"]
+    forecast_df['Fecha'] = forecast_dates
+    forecast_df['Fecha'] = pd.to_datetime(forecast_df['Fecha'], format='%d.%m.%Y', errors='coerce')
     #forecast_df['Fecha'] = pd.to_datetime(forecast_df['Fecha'], format = '%d.%m.%Y', errors='coerce')
     return forecast_df
 
